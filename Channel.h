@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Adc.h"
 #include <vector>
 #include <string>
@@ -10,7 +9,6 @@ class Channel {
 
 public:
     Channel(ADC<T, N>& adc) : adc(adc) {}
-
     virtual ~Channel() = default;
     virtual size_t run(std::vector<double>& inputs);
     virtual std::vector<double> get_values();
