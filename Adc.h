@@ -13,15 +13,12 @@ struct ADC {
     double sensitivity;
     double trigger_level;
     std::vector<T> samples;
-
 public:
     T convert(double voltage) {
         if (voltage < rangeMin) voltage = rangeMin;
-        if (voltage > rangeMax) voltage = rangeMax;
-
-        long long max_digital_value = (1LL << bits) - 1;
-
-        double proportion = (voltage - rangeMin) / (rangeMax - rangeMin);
+            if (voltage > rangeMax) voltage = rangeMax;
+                long long max_digital_value = (1LL << bits) - 1;
+                double proportion = (voltage - rangeMin) / (rangeMax - rangeMin);
         return static_cast<T>(std::round(proportion * max_digital_value));
     }
 
@@ -37,11 +34,8 @@ public:
 
     double value(size_t i) {
         if (i >= samples.size()) return 0.0;
-        
         long long max_digital_value = (1LL << bits) - 1;
-
         double voltage = (static_cast<double>(samples[i]) / max_digital_value) * (rangeMax - rangeMin) + rangeMin;
-
         return voltage * sensitivity;
     }
 
